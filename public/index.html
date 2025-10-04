@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minecraft Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="index.css">
+  
+</head>
+<body>
+
+  <div class="header">
+    <h1 class="page-title">Minecraft Dashboard</h1>
+
+    <div class="controls">
+      <button class="start-stop">Stop</button>
+
+      <button class="start-stop">Restart</button>
+    </div>
+  </div>
+
+  <div class="info">
+    <div class="ip">192.168.254.94</div>
+
+    <div class="version">1.21.9</div>
+
+    <div class="card">
+      <div id="status">Loading players...</div>
+      <ul id="players"></ul>
+    </div>
+  </div>
+
+  <br>
+  <hr>
+
+  <div class="nav-container">
+      <button onclick="window.location.href='index.html'"class="nav-header">Dashboard</button>
+
+      <button onclick="window.location.href='console.html'"class="nav-header">Console</button>
+
+      <button onclick="window.location.href='bluemap.html'"class="nav-header">BlueMap</button>
+
+      <button onclick="window.location.href='players.html'"class="nav-header">Players</button>
+
+      <button onclick="window.location.href='plugins.html'"class="nav-header">Plugins</button>
+
+      <button onclick="window.location.href='backups.html'"class="nav-header">Backups</button>
+  </div>
+
+  <div class="system">
+    <div class="cpu"id="cpu">CPU: Loading...</div>
+    <div class="ram"id="ram">RAM: Loading...</div>
+    <div class="uptime">Uptime:</div>
+  </div>  
+
+  <script>
+    async function updateDashboard() {
+      try {
+        // 1️⃣ Get player info
+        const resPlayers = await fetch("/players");
+        const dataPlayers = await resPlayers.json();
+
+        const statusDiv = document.getElementById("status");
+        const playersList = document.getElementById("players");
+        playersList.innerHTML = "";
+
+        if (dataPlayers.error) {
+          statusDiv.innerText = `❌ Error fetching players: ${dataPlayers.error}`;
+        } else {
+          statusDiv.innerText = `Players online: ${dataPlayers.online} / ${dataPlayers.max}`;
+          if (dataPlayers.players.length > 0) {
+            dataPlayers.players.forEach(p => {
+              const li = document.createElement("li");
+              li.innerText = p;
+              playersList.appendChild(li);
+            });
+          } else {
+            playersList.innerHTML = "<li>No players online</li>";
+          }
+        }
+
+        // 2️⃣ Get server stats
+        const resStats = await fetch("/server-stats");
+        const dataStats = await resStats.json();
+
+        document.getElementById("cpu").innerText = dataStats.error ? 
+          `CPU: Error (${dataStats.error})` : 
+          `CPU: ${dataStats.cpuPercent}%`;
+
+        document.getElementById("ram").innerText = dataStats.error ? 
+          `RAM: Error (${dataStats.error})` : 
+          `RAM: ${dataStats.memoryMB} MB`;
+
+        document.getElementById("system").innerText = dataStats.error ? 
+          `System RAM: Error (${dataStats.error})` : 
+          `System RAM Used: ${dataStats.systemUsedGB} GB / ${dataStats.systemTotalGB} GB`;
+
+        document.getElementById("updated").innerText = `Last updated: ${new Date().toLocaleTimeString()}`;
+
+      } catch (err) {
+        document.getElementById("status").innerText = `❌ Error fetching data: ${err.message}`;
+      }
+    }
+
+    updateDashboard();
+    setInterval(updateDashboard, 5000); // refresh every 5 seconds
+  </script>
+</body>
+</html>

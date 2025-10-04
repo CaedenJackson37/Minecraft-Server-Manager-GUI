@@ -1,0 +1,78 @@
+.page-title {
+    font-size: 40px;
+    justify-content: flex-start;
+    margin-left: 20px;
+}
+
+.start-stop {
+    font-size: 20px;
+    background: #4169E1;
+    margin-right: 20px;
+    padding: 1px 8px;
+    border-radius: 12px
+}
+
+body {
+    background: #282828;
+    color: #bdbdbd;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    
+}
+
+.info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 20px;
+    gap: 50px;
+}
+
+.nav-header {
+    font-size: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+.ip {
+    margin-left: 20px;
+}
+
+.system {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 20px;
+    font-size: 30px;
+}
+
+.cpu {
+    background-color: #808080;
+    color: darkslateblue;
+    padding: 20px 30px;
+}
+
+.ram {
+    background-color: #808080;
+    color: #4169E1;
+    padding: 20px 30px;
+}
+
+.uptime {
+    background-color: #808080;
+    color: mediumspringgreen;
+    padding: 20px 30px;
+}

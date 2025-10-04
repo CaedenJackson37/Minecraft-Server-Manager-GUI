@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minecraft Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="index.css">
+  
+</head>
+<body>
+
+  <div class="header">
+    <h1 class="page-title">Minecraft Dashboard</h1>
+
+    <div class="controls">
+      <button class="start-stop">Stop</button>
+
+      <button class="start-stop">Restart</button>
+    </div>
+  </div>
+
+  <div class="info">
+    <div class="ip">192.168.254.94</div>
+
+    <div class="version">1.21.9</div>
+
+    <div class="card">
+      <div id="status">Loading players...</div>
+      <ul id="players"></ul>
+    </div>
+  </div>
+
+  <br>
+  <hr>
+
+  <div class="nav-container">
+      <button onclick="window.location.href='index.html'"class="nav-header">Dashboard</button>
+
+      <button onclick="window.location.href='console.html'"class="nav-header">Console</button>
+
+      <button onclick="window.location.href='bluemap.html'"class="nav-header">BlueMap</button>
+
+      <button onclick="window.location.href='players.html'"class="nav-header">Players</button>
+
+      <button onclick="window.location.href='plugins.html'"class="nav-header">Plugins</button>
+
+      <button onclick="window.location.href='backups.html'"class="nav-header">Backups</button>
+  </div>
