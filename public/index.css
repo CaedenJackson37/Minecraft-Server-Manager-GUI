@@ -14,14 +14,23 @@
 
 body {
     background: #282828;
-    color: #bdbdbd;
+    color: white;
 }
 
-.nav-container {
+ul {
     display: flex;
     justify-content: space-evenly;
-    align-items: baseline;
-    
+    list-style-type: none;   
+    background-color: gray;
+    pad: 20px 10px;
+}
+
+ul li a:hover {
+    background-color: darkgray;
+    pad: 20px 10px;
+}
+ul li a.active {
+    background-color: #4169E1;
 }
 
 .info {
